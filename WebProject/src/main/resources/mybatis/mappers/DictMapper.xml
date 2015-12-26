@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhou.swagger.dao.DictDao">
+    <resultMap id="DictResultMap" type="com.zhou.swagger.model.Dictionary" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="dictKey" property="dictKey" jdbcType="VARCHAR" />
+        <result column="dictValue" property="dictValue" jdbcType="VARCHAR" />
+        <result column="descript" property="descript" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="DictFields">
+        id,createTime,updateTime,dictKey,dictValue,descript
+    </sql>
+
+    <insert id="insertDict" parameterType="com.zhou.swagger.model.Dictionary">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into iw_agent_dict(createTime,updateTime,dictKey,dictValue,descript) values(#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{dictKey,jdbcType=VARCHAR},#{dictValue,jdbcType=VARCHAR},#{descript,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectDictById" resultMap="DictResultMap" parameterType="java.lang.Long">
+        select <include refid="DictFields"/> from iw_agent_dict where id=#{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectDictByKey" resultMap="DictResultMap" parameterType="java.lang.String">
+        select <include refid="DictFields"/> from iw_agent_dict where dictKey=#{dictKey,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAllDicts" resultMap="DictResultMap">
+        select <include refid="DictFields"/> from iw_agent_dict
+    </select>
+
+    <update id="updateDictById">
+        update iw_agent_dict
+        <set>
+            <if test="dict.createTime!=null">
+                createTime=#{dict.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dict.updateTime!=null">
+                updateTime=#{dict.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dict.dictKey!=null">
+                dictKey=#{dict.dictKey,jdbcType=VARCHAR},
+            </if>
+            <if test="dict.dictValue!=null">
+                dictValue=#{dict.dictValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dict.descript!=null">
+                descript=#{dict.descript,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where  id=#{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateDictByKey">
+        update iw_agent_dict
+        <set>
+            <if test="dict.createTime!=null">
+                createTime=#{dict.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dict.updateTime!=null">
+                updateTime=#{dict.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dict.dictValue!=null">
+                dictValue=#{dict.dictValue,jdbcType=VARCHAR},
+            </if>
+            <if test="dict.descript!=null">
+                descript=#{dict.descript,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where  dictKey=#{dictKey,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteDictById">
+         delete from iw_agent_dict where id=#{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteDictByKey">
+        delete from iw_agent_dict where dictKey=#{dictKey,jdbcType=VARCHAR}
+    </delete>
+</mapper>

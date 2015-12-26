@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<!--JOTM本地实例 -->
+	<bean id="jotm" class="zhou.jta.jotm.transaction.JotmFactoryBean" />
+	
+	<!--JTA事务管理器 -->
+	<bean id="txManager"
+		class="org.springframework.transaction.jta.JtaTransactionManager">
+		<property name="userTransaction" ref="jotm" /><!--指定userTransaction属性引用JOTM本地实例 -->
+	</bean>
+
+	<!--注解事务驱动 -->
+	<tx:annotation-driven transaction-manager="txManager"
+		proxy-target-class="true" />
+	
+	<!-- 载入.properties文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+		<list>
+			<value>classpath:zhou/jta/jotm/config.properties</value>
+		</list>
+		</property>
+	</bean>
+	
+	<!--配置数据源，指定连接池 -->
+	<bean id="oneSource" class="org.enhydra.jdbc.pool.StandardXAPoolDataSource">
+		<property name="dataSource"><!--内部XA数据源，与dao相连 -->
+			<bean class="org.enhydra.jdbc.standard.StandardXADataSource">
+				<property name="transactionManager" ref="jotm" /><!--引入了JOTM本地实例，实现jta分布式事务管理 -->
+				<property name="driverName" value="${driverName}" />
+				<property name="url" value="${url}" />
+			</bean>
+		</property>
+		<property name="user" value="${user}" />
+		<property name="password" value="${password}" />
+	</bean>
+	
+	<bean id="twoSource" class="org.enhydra.jdbc.pool.StandardXAPoolDataSource">
+		<property name="dataSource"><!--内部XA数据源 -->
+			<bean class="org.enhydra.jdbc.standard.StandardXADataSource">
+				<property name="transactionManager" ref="jotm" />
+				<property name="driverName" value="${driverName2}" />
+				<property name="url" value="${url2}" />
+			</bean>
+		</property>
+		<property name="user" value="${user2}" />
+		<property name="password" value="${password2}" />
+	</bean>
+	
+	<!-- 创建Spring JDBC模板，并指定数据源 -->
+	<bean id="dboneJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="oneSource" />
+	</bean>
+	
+	<bean id="dbtwoJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="twoSource" />
+	</bean>
+
+	<!-- 创建基于某Spring JDBC模板的dao -->
+	<bean id="testone" class="zhou.jta.jotm.dao.DbOne">
+		<property name="jdbcTemplate" ref="dboneJdbcTemplate" />
+	</bean>
+	
+	<bean id="testtwo" class="zhou.jta.jotm.dao.DbTwo">
+		<property name="jdbcTemplate" ref="dbtwoJdbcTemplate" />
+	</bean>
+		
+	<!-- 创建Bll，将两个dao注入进来 -->
+	<bean id="trantest" class="zhou.jta.jotm.transaction.TranTest">
+		<property name="dbone" ref="testone" />
+		<property name="dbtwo" ref="testtwo" />
+	</bean>
+	
+</beans>

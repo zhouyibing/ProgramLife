@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/cglib/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/common/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/common/mysql-connector-java-5.1.35.jar"/>
+	<classpathentry kind="lib" path="lib/common/servlet-api-3.1.jar" sourcepath="C:/Users/Administrator/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0-sources.jar"/>
+	<classpathentry kind="lib" path="lib/disruptor/disruptor-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-http-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-io-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-jmx-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-security-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-server-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-servlet-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-util-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-webapp-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jetty/jetty-xml-9.2.10.v20150310.jar"/>
+	<classpathentry kind="lib" path="lib/jmx/jmxtools.jar"/>
+	<classpathentry kind="lib" path="lib/jta/jta.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring-beans-3.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring-context-3.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring-core-3.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring-expression-3.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring-jdbc-3.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring-tx-3.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/jotm/jotm-client.jar"/>
+	<classpathentry kind="lib" path="lib/jotm/jotm-core.jar"/>
+	<classpathentry kind="lib" path="lib/jotm/jotm-datasource.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring-aop-3.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jotm/xapool-1.6.beta.jar"/>
+	<classpathentry kind="lib" path="lib/guava/com.google.common-guava-18.0.jar" sourcepath="E:/快盘/workspace_yd/guava"/>
+	<classpathentry kind="lib" path="lib/guava/mockito-all-1.9.5-sources.jar"/>
+	<classpathentry kind="lib" path="lib/guava/mockito-all-1.9.5.jar" sourcepath="C:/Users/Administrator/.m2/repository/org/mockito/mockito-all/1.9.5/mockito-all-1.9.5-sources.jar"/>
+	<classpathentry kind="lib" path="lib/hessian/hessian-4.0.37.jar" sourcepath="/hessian"/>
+	<classpathentry kind="lib" path="lib/akka/akka-actor_2.10-2.3.7.jar" sourcepath="D:/Repository"/>
+	<classpathentry kind="lib" path="lib/akka/akka-cluster_2.10-2.3.9.jar"/>
+	<classpathentry kind="lib" path="lib/akka/akka-remote_2.10-2.3.7.jar"/>
+	<classpathentry kind="lib" path="lib/akka/akka-slf4j_2.10-2.3.7.jar"/>
+	<classpathentry kind="lib" path="lib/akka/config-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/akka/scala-library-2.10.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>统一授权系统</title>
+<link rel="stylesheet" type="text/css" href="resource/js/jquery-easyui-1.3.5/themes/orange/easyui.css"/>
+<link rel="stylesheet" type="text/css" href="resource/js/jquery-easyui-1.3.5/themes/icon.css"/>
+<link rel="stylesheet" type="text/css" href="resource/css/index.css"/>
+<script type="text/javascript" src="resource/js/jquery-easyui-1.3.5/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="resource/js/jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="resource/js/jquery-easyui-1.3.5/jquery.easyui.bug-fixes.js"></script>
+<script type="text/javascript" src="resource/js/jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="resource/js/jcdf-1.0.js"></script>
+<script type="text/javascript" src="resource/js/jcdf-index-1.0.js"></script>
+</head>
+<body class="easyui-layout">
+	<div class="header" data-options="region:'north',border:false">
+		<div class="logo">
+			<img src="resource/img/logo.jpg" style="display:block"></div>
+		<div class="line">
+			<img src="resource/img/line.jpg">
+		</div>
+		<div class="title">
+			<img src="resource/img/title.jpg">
+		</div>
+		<div class=loginInfo>
+			<table style="border: 0; font-size: 14px;" cellpadding="0" cellspacing="0">
+				<tr>
+					<td><span>你好，</span></td>	
+					<td><span id="userName"></span></td>	
+					<td><span id="userAdminNames" style="margin-right:10px"></span></td>	
+					<td><span>登录时间：</span></td>
+					<td><span id=loginTime style="margin-right:10px"></span></td>				
+					<td class="buttonrow login"><button id="logout" type="button" style="cursor: pointer;">退出</button></td>
+				</tr>
+			</table>		
+		</div>
+	</div>
+	<div id="lefter" class="lefter" data-options="region:'west',split:true,title:'系统菜单',">
+		<div id="sysMenu" class="easyui-accordion" data-options="fit:true,border:false,">
+
+		</div>
+
+	</div>
+	<div id="mm" class="easyui-menu" style="width:150px;">
+		<div id="mm-tabclose">关闭</div>  
+        <div id="mm-tabcloseall">关闭全部</div>  
+        <div id="mm-tabcloseother">关闭其他</div>  
+        <div class="menu-sep"></div>  
+        <div id="mm-tabcloseright">关闭右侧标签</div>  
+        <div id="mm-tabcloseleft">关闭左侧标签</div>	
+    </div>
+	<div class="center" data-options="region:'center'">
+		<div id="centerTab" class="easyui-tabs" fit="true" border="false"
+			plain="true">
+			<div id="welcomeTab" title="欢迎页面" closable="false">
+				<div style="width: 100%;height: 100%;background-image: url('resource/img/welcome.jpg');background-position: center; background-repeat: no-repeat;">
+					
+				</div>
+			</div>
+		</div>
+	</div> 
+	<div class="footer" data-options="region:'south',border:false">
+		Copyright©&nbsp;上海东普信息科技有限公司&nbsp;&nbsp;版本：v3.1
+	</div>
+</body>
+</html>

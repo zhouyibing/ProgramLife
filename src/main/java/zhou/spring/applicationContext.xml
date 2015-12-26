@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd" default-autowire="byName">
+ <bean name="customBeanFactoryPostProcessor" class="zhou.spring.test.TestBeanFactoryPostProcessor.CustomBeanFactoryPostProcessor"/>
+ <!-- <bean name="customBeanPostProcessor" class="zhou.spring.test.TestBeanPostProcessor.CustomBeanPostProcessor"/> -->
+ <bean name="simpleFactoryBean" class="zhou.spring.beans.SimpleFactoryBean"/>
+ <bean name="simpleBean" class="zhou.spring.beans.SimpleBean">
+    <property name="property1" value="12"/>
+ </bean>
+ <bean name="simpleBeanByBeanFactory" class="zhou.spring.test.CreateBeanWithFactory.BeanFactoryWithFacotyMethod" factory-method="createInstance"/>
+ <bean name="factoryBean" class="zhou.spring.test.CreateBeanWithFactory.BeanFactory"/>
+ <bean name="simpleBeanByBeanFactory2" factory-bean="factoryBean" factory-method="createInstance"/>
+</beans>

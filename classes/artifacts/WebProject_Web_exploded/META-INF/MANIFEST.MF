@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: WebProject
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: Administrator
+Specification-Title: WebProject
+Implementation-Vendor-Id: com.zhou
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.7.0_79
+Specification-Version: 1.0-SNAPSHOT
+

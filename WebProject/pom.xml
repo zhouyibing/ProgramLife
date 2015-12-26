@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.zhou</groupId>
+        <artifactId>ProgramLife</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.zhou</groupId>
+    <artifactId>WebProject</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>WebProject</name>
+
+    <properties>
+        <!--设置源码和资源文件，输出文件的编码格式-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--java complier编译版本-->
+        <javac.target.version>1.7</javac.target.version>
+
+        <!--maven编译插件版本-->
+        <maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
+        <maven.dependency.plugin.version>2.9</maven.dependency.plugin.version>
+        <maven.resources.plugin.version>2.7</maven.resources.plugin.version>
+        <maven.war.plugin.version>2.5</maven.war.plugin.version>
+
+        <!--依赖包版本-->
+        <commons.logging.version>1.2</commons.logging.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.7</slf4j.version>
+        <mybatis.version>3.2.7</mybatis.version>
+        <mybatis.spring.version>1.2.2</mybatis.spring.version>
+        <springframework.version>4.1.1.RELEASE</springframework.version>
+        <jackson.version>2.5.1</jackson.version>
+        <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
+        <servlet.api.version>3.1.0</servlet.api.version>
+        <swagger-springmvc.version>0.9.5</swagger-springmvc.version>
+        <jetty.version>9.2.10.v20150310</jetty.version>
+        <mysql.version>5.1.33</mysql.version>
+        <commons.dbcp.version>1.4</commons.dbcp.version>
+
+    </properties>
+
+    <dependencies>
+        <!-- jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>${codehaus.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${codehaus.jackson.version}</version>
+        </dependency>
+
+        <!--swagger-->
+        <dependency>
+            <groupId>com.mangofactory</groupId>
+            <artifactId>swagger-springmvc</artifactId>
+            <version>${swagger-springmvc.version}</version>
+        </dependency>
+
+        <!-- commons-dbcp -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons.dbcp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zhou</groupId>
+            <artifactId>extractfile</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>WebProject</finalName>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+        <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
+                <configuration>
+                    <warSourceExcludes>**/*.css,**/*.js</warSourceExcludes>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <id>compile phase</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 包含js文件和css文件 -->
+                    <includes>
+                        <include>**/*.js</include>
+                        <include>**/*.css</include>
+                    </includes>
+                    <!-- 排除本来就压缩的js文件，比如jquery.min.js  xxx-min.js之类的文件 -->
+                    <excludes>
+                        <exclude>**/swagger-ui.js</exclude>
+                    </excludes>
+                    <encoding>utf8</encoding>
+                    <failOnWarning>false</failOnWarning>
+                    <force>true</force>
+                    <nosuffix>true</nosuffix>
+                    <linebreakpos>-1</linebreakpos>
+                    <jswarn>false</jswarn>
+                </configuration>
+            </plugin>
+            <plugin>
+               <groupId>com.zhou</groupId>
+               <artifactId>extractfile</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <configuration>
+                    <includes>
+                        <include>java</include>
+                        <include>properties</include>
+                        <include>js</include>
+                        <include>html</include>
+                        <include>css</include>
+                        <include>xml</include>
+                    </includes>
+                    <rankType>1</rankType>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile phase</id>
+                        <phase>compile</phase>
+                         <goals>
+                             <goal>print</goal>
+                             <goal>codeanalysis</goal>
+                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        </pluginManagement>
+
+    </build>
+
+</project>

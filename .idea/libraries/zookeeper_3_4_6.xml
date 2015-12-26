@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="zookeeper-3.4.6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/zookeeper/zookeeper-3.4.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/zookeeper/zookeeper-3.4.6.jar!/" />
+    </SOURCES>
+  </library>
+</component>

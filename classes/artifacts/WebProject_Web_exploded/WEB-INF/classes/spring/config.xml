@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+      <context:component-scan base-package="com.zhou.swagger" name-generator="org.springframework.beans.factory.support.DefaultBeanNameGenerator"/>
+      <context:property-placeholder location="classpath:config.properties"/>
+      <bean id="dataSource">
+        <!--  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+          <property name="url" value="jdbc:mysql://192.168.80.142:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"/>
+          <property name="username" value="root"/>
+          <property name="password" value="123456"/>
+          <property name="maxIdle" value="10"/>
+          <property name="minIdle" value="2"/>
+          <property name="initialSize" value="2"/>
+          <property name="validationQuery" value="select 1" />
+          <property name="maxWait" value="60"/>
+          <property name="maxOpenPreparedStatements" value="5"/>
+          <property name="maxActive" value="10"/>
+          &lt;!&ndash; 设置在自动回收超时连接的时候打印连接的超时错误  &ndash;&gt;
+          <property name="logAbandoned" value="true"/>
+          &lt;!&ndash; 设置自动回收超时连接 &ndash;&gt;
+          <property name="removeAbandoned"  value="true"/>
+          &lt;!&ndash; 超时时间(以秒数为单位) &ndash;&gt;
+          <property name="removeAbandonedTimeout" value="10"/>-->
+      </bean>
+
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis/sqlmap-config.xml"/>
+        <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="readMapperScannerConfigurer">
+        <property name="basePackage" value="com.zhou.swagger.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    </beans>
