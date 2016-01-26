@@ -29,6 +29,7 @@ public class VolatileLock {
            });
        }
        try {
+           executorService.shutdown();
            executorService.awaitTermination(1, TimeUnit.MINUTES);
        } catch (InterruptedException e) {
            e.printStackTrace();
@@ -42,8 +43,10 @@ public class VolatileLock {
             System.out.println(Thread.currentThread().getName() + " wait to get the lock.");
             while (flag){
             }
-            flag = true;
-            System.out.println(Thread.currentThread().getName() + " has get the lock.");
+            if(!flag) {
+                System.out.println(Thread.currentThread().getName() + " has get the lock.");
+                flag = true;
+            }
         }
 
         public void unlock(){
