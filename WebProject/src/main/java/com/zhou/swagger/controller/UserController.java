@@ -51,10 +51,11 @@ public class UserController {
     @ApiOperation(value = "根据pk查找用户", notes = "返回用户实体对象", response = User.class, position = 2,httpMethod = "GET",produces = "application/json; charset=utf-8")
     @ResponseBody
     @RequestMapping(value = { "/{userPk}" }, method = RequestMethod.GET)
-    public ResponseEntity<?> findByPk(
+    public Result<User> findByPk(
             @ApiParam(value = "填写Pk", allowableValues = "range[1,5]", required = true, defaultValue = "userPk", allowMultiple = true) @PathVariable("userPk") Integer userPk) {
-        Result<User> result = ResultUtil.buildSuccessResult(userService.findByPk(userPk));
-        return new ResponseEntity<Result<User>>(result, HttpStatus.OK);
+        Result<User> result = new Result<>();
+        result.setData(userService.findByPk(userPk));
+        return result;
     }
      
     /**

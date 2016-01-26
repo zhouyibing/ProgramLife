@@ -8,7 +8,7 @@ import javax.management.MalformedObjectNameException;
 import javax.management.NotCompliantMBeanException;
 import javax.management.ObjectName;
 
-import com.sun.jdmk.comm.HtmlAdaptorServer;
+//import com.sun.jdmk.comm.HtmlAdaptorServer;
 
 /**
  *  该类是一个Agent类，说明： 先创建了一个MBeanServer，用来做MBean的容器 
@@ -39,10 +39,10 @@ public class TestHelloWorld {
         ObjectName adapterName = new ObjectName(  
                 "HelloAgent:name=htmladapter,port=6666");  
         //创建一个AdaptorServer，这个类将决定MBean的管理界面，这里用最普通的Html型界面  
-        HtmlAdaptorServer adapter = new HtmlAdaptorServer();  
-        adapter.setPort(8080);  
-        server.registerMBean(adapter, adapterName);  
-        adapter.start(); 
-        System.out.println("start.....");  
+       /* HtmlAdaptorServer adapter = new HtmlAdaptorServer();
+        adapter.setPort(8080);
+        server.registerMBean(adapter, adapterName);
+        adapter.start();
+        System.out.println("start.....");  */
 	}
 }

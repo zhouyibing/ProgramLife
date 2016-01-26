@@ -2,14 +2,14 @@ package framework.guava.utilities;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Ints;
 import com.sun.istack.internal.Nullable;
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 

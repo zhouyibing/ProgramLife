@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 package zhou.jta.jotm.transaction;
 
@@ -24,6 +25,7 @@ import org.objectweb.jotm.Jotm;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 
+*/
 /**
  * FactoryBean that retrieves the JTA UserTransaction/TransactionManager for
  * ObjectWeb's <a href="http://jotm.objectweb.org">JOTM. Will retrieve
@@ -76,7 +78,8 @@ import org.springframework.beans.factory.FactoryBean;
  * @see JtaTransactionManager#setUserTransaction
  * @see JtaTransactionManager#setTransactionManager
  * @see org.objectweb.jotm.Current
- */
+ *//*
+
 public class JotmFactoryBean implements FactoryBean, DisposableBean {
 
 	private Current jotmCurrent;
@@ -97,20 +100,24 @@ public class JotmFactoryBean implements FactoryBean, DisposableBean {
 		}
 	}
 
-	/**
+	*/
+/**
 	 * Set the default transaction timeout for the JOTM instance.
 	 * <p>Should only be called for a local JOTM instance,
 	 * not when accessing an existing (shared) JOTM instance.
-	 */
+	 *//*
+
 	public void setDefaultTimeout(int defaultTimeout) {
 		this.jotmCurrent.setDefaultTimeout(defaultTimeout);
 	}
 
-	/**
+	*/
+/**
 	 * Return the JOTM instance created by this factory bean, if any.
 	 * Will be <code>null if an already active JOTM instance is used.
 	 * <p>Application code should never need to access this.
-	 */
+	 *//*
+
 	public Jotm getJotm() {
 		return this.jotm;
 	}
@@ -129,13 +136,15 @@ public class JotmFactoryBean implements FactoryBean, DisposableBean {
 	}
 
 
-	/**
+	*/
+/**
 	 * Stop the local JOTM instance, if created by this FactoryBean.
-	 */
+	 *//*
+
 	public void destroy() {
 		if (this.jotm != null) {
 			this.jotm.stop();
 		}
 	}
 
-}
+}*/

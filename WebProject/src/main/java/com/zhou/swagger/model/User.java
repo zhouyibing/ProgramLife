@@ -1,12 +1,20 @@
 package com.zhou.swagger.model;
 
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 /**
  * Created by Zhou Yibing on 2015/11/10.
  */
+@ApiModel("User")
 public class User {
+    @ApiModelProperty("id")
     private long id;
+    @ApiModelProperty("姓名")
     private String name;
+    @ApiModelProperty("性别")
     private int sex;
+    @ApiModelProperty("年龄")
     private int age;
 
     public long getId() {

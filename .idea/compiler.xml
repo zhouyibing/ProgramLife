@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <excludeFromCompile>
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/j2ee/servlet/ServletServer.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/framework/guava/utilities/Book.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/framework/guava/cache/TestCache.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/framework/guava/fp/TestPredicates.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/spring/test/TestBeanPostProcessor.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/framework/btrace/RequestMonitor.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/akka/example_pi/Pi.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/concurrent/collection/NonBlockSafeList.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/base/jndi/TestJndi.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/base/rpc/RPC.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/base/rpc/MainClient.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/base/rpc/Main.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/base/junit/TheoryTest.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/zhou/base/collection/TestDeleteDuplicateElement.java" />
-    </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
       <entry name="!?*.java" />
@@ -40,6 +24,13 @@
         <processorPath useClasspath="true" />
         <module name="WebProject" />
       </profile>
+      <profile default="false" name="Annotation profile for extractfile" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="extractfile" />
+      </profile>
       <profile default="false" name="Annotation profile for ExtractFile" enabled="true">
         <sourceOutputDir name="target\generated-sources\annotations" />
         <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
@@ -50,8 +41,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
       <module name="ExtractFile" target="1.7" />
-      <module name="MavenTest" target="1.5" />
-      <module name="ProgramLife" target="1.5" />
+      <module name="ProgramLife" target="1.7" />
       <module name="WebProject" target="1.7" />
     </bytecodeTargetLevel>
   </component>
