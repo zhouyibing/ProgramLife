@@ -283,7 +283,12 @@
             <artifactId>zookeeper</artifactId>
             <version>3.4.6</version>
         </dependency>
-
+        <!--quartz定时任务包-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.0.1</version>
+        </dependency>
         <!--test-->
         <dependency>
             <groupId>junit</groupId>
