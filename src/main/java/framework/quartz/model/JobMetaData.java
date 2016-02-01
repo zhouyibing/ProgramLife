@@ -1,16 +1,19 @@
 package framework.quartz.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Zhou Yibing on 2016/1/29.
  */
-public class JobMetaData {
+public class JobMetaData implements Serializable{
     private String jobName;
     private boolean concurrent;
     private String jobGroup;
     private String jobId;
-    private String cronExpression;
+    private Class jobClass;
     private String desc;
-    private JobStatus jobstatus;
+    private Integer executeCount;
+    private JobStatus jobstatus = JobStatus.OFF;
 
     public String getJobName() {
         return jobName;
@@ -44,12 +47,12 @@ public class JobMetaData {
         this.jobId = jobId;
     }
 
-    public String getCronExpression() {
-        return cronExpression;
+    public Class getJobClass() {
+        return jobClass;
     }
 
-    public void setCronExpression(String cronExpression) {
-        this.cronExpression = cronExpression;
+    public void setJobClass(Class jobClass) {
+        this.jobClass = jobClass;
     }
 
     public String getDesc() {
@@ -66,6 +69,14 @@ public class JobMetaData {
 
     public void setJobstatus(JobStatus jobstatus) {
         this.jobstatus = jobstatus;
+    }
+
+    public Integer getExecuteCount() {
+        return executeCount;
+    }
+
+    public void setExecuteCount(Integer executeCount) {
+        this.executeCount = executeCount;
     }
 
     public enum JobStatus{
