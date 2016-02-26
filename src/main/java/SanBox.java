@@ -6,10 +6,8 @@ public class SanBox {
 	 */
 	public static void main(String[] args) {
 
-		StringBuffer sb = new StringBuffer("a");
-		StringBuilder builder = new StringBuilder("vssd");
-		sb.append("da");
-		builder.append("sd");
+		String a="1,,3,";
+		System.out.println(a.split(",").length);
 	}
 
 }

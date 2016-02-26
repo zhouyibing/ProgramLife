@@ -25,7 +25,7 @@ public class TestBuferProperty {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		FileInputStream fin = new FileInputStream("src\\zhou\\base\\nio\\test.txt");  
+		FileInputStream fin = new FileInputStream("src\\main\\java\\zhou\\base\\nio\\test.txt");
         FileChannel fc = fin.getChannel();  
   
         ByteBuffer buffer = ByteBuffer.allocate(10);  

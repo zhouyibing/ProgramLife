@@ -51,7 +51,7 @@ public class NIOServer {
 		// 轮询访问selector 
 		while(true){
 			//当注册的事件到达时，方法返回；否则,该方法会一直阻塞  
-			selector.select();
+			selector.select(100L);
 			Iterator<SelectionKey> ite = this.selector.selectedKeys().iterator();
 			while(ite.hasNext()){
 				SelectionKey key = ite.next();

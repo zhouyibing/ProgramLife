@@ -1,5 +1,5 @@
 package framework.mybatis;
 
-public class ＵserInfo {
+public class UserInfo {
 
 }
