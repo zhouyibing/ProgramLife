@@ -60,6 +60,7 @@ public  class Server{
         public void sessionCreated(IoSession session) throws Exception {
             logger.info("创建session:"+session.getId()+"-"+session.getRemoteAddress()+")");
             session.write("欢迎进入聊天室");
+            session.setAttribute("key","1111");
             Collection<IoSession> sessionCollection = session.getService().getManagedSessions().values();
             for(IoSession ioSession:sessionCollection) {
                 if (ioSession.getId() != session.getId())
