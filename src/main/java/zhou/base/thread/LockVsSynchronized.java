@@ -27,6 +27,9 @@ public class LockVsSynchronized {
 		try {
 			runTasks(TaskWithLock.class);
 			runTasks(TaskWithSynchronized.class);
+			/*TaskWithLock taskWithLock = new TaskWithLock();
+			taskWithLock.run();
+			taskWithLock.run();*/
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
