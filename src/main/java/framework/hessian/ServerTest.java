@@ -14,8 +14,8 @@ public class ServerTest {
 		
 		WebAppContext webapp = new WebAppContext();
 		webapp.setContextPath("/hello");
-	    webapp.setDescriptor(Thread.currentThread().getContextClassLoader().getResource("framework/hessian/web.xml").toString());
-	    webapp.setResourceBase(Thread.currentThread().getContextClassLoader().getResource("framework/hessian").toString());
+	    webapp.setDescriptor("src/main/java/framework/hessian/web.xml");
+	    webapp.setResourceBase("src/main/java/framework/hessian");
 		server.setHandler(webapp);
 		server.start();
 		server.join();
