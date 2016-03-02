@@ -2,6 +2,7 @@ package framework.mongodb;
 
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -44,9 +45,43 @@ public class MongodbSimpleTest {
 
         MongoDatabase db2 = mongoClient.getDatabase("aaa");
         //db2.createCollection("ccc");
-        db2.getCollection("ccc").drop();
-        db2.drop();
+        //db2.getCollection("ccc").drop();
+        //db2.drop();
+
+        //groupQuery(restaurants);
+        matchAndGroup(restaurants);
+        createIndex(restaurants);
         mongoClient.close();
+    }
+
+    public static void createIndex(MongoCollection restaurants){
+        restaurants.dropIndex(new Document("restaurant_id",1));
+        String result = restaurants.createIndex(new Document("restaurant_id",1).append("name",1));
+        System.out.println(result);
+    }
+
+    /**
+     * 根据borough字段分组,并对分组进行计数
+     * @param restaurants
+     */
+    public static void groupQuery(MongoCollection restaurants){
+         AggregateIterable iterable = restaurants.aggregate(asList(new Document("$group", new Document("_id", "$borough").append("count", new Document("$sum", 1)))));
+        iterable.forEach(new Block<Document>() {
+            @Override
+            public void apply(Document o) {
+                System.out.println(o);
+            }
+        });
+    }
+
+    public static void matchAndGroup(MongoCollection restaurants){
+        AggregateIterable iterable = restaurants.aggregate(asList(new Document("$match",new Document("borough","Queens").append("cuisine","Brazilian")),new Document("$group",new Document("_id","$address.zipcode").append("count",new Document("$sum",1)))));
+        iterable.forEach(new Block<Document>() {
+            @Override
+            public void apply(Document o) {
+                System.out.println(o);
+            }
+        });
     }
 
     public static void update(MongoCollection restaurants){
