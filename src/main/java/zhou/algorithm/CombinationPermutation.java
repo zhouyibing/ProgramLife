@@ -7,7 +7,7 @@ package zhou.algorithm;
 public class CombinationPermutation {
 
       public static void main(String[] args){
-          String[] arr = new String[]{"A","B","C","D","E"};
+          String[] arr = new String[]{"A","B","C"};
           combine(arr);
       }
 
