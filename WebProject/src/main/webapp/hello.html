@@ -2,9 +2,32 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Hi,Welcome!</title>
+  <title>JSONP跨域请求测试</title>
   </head>
+<script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+<script>
+    /*jsonp原理
+    * 首先在客户端注册一个callback, 然后把callback的名字传给服务器。此时，服务器先生成 json 数据。 然后以 javascript 语法的方式，生成一个function , function 名字就是传递上来的参数 jsonp。最后将 json 数据直接以入参的方式，放置到 function 中，这样就生成了一段 js 语法的文档，返回给客户端
+    * */
+    function getCrossDomainInfo(){
+        $.ajax({
+            url:"http://127.0.0.1:8082/WebProject/test/testJsonp?jsoncallback=change",
+            type:'GET',
+            dataType:"jsonp",
+            timeout:5000,
+        });
+        $.getJSON("http://127.0.0.1:8082/WebProject/test/testJsonp?jsoncallback=?",function(json){
+            document.getElementById("crossJson").innerHTML=json.message;
+        })
+    }
+    function change(json){
+        document.getElementById("crossJson2").innerHTML=json.message;
+    }
+</script>
 <body>
    <h4>Hi,Welcome!</h4>
+   <input type="button" onclick="getCrossDomainInfo()" value="跨域请求"/>
+   <h4 id="crossJson"></h4>
+   <h4 id="crossJson2"></h4>
 </body>
 </html>
