@@ -7,13 +7,13 @@ import java.util.*;
 
 /**
  * Created by Zhou Yibing on 2015/12/21.
- * Ò»ÖÂÐÔhashËã·¨javaÊµÏÖ
+ * Ò»ï¿½ï¿½ï¿½ï¿½hashï¿½ã·¨javaÊµï¿½ï¿½
  */
 public class ConsistentHash {
 
-    private TreeMap<Long,Object> nodes;//·þÎñÆ÷hash½Úµã
-    private static final int VIRTUALNODE_NUM=4;//ÐéÄâ½Úµã¸öÊý
-    private List<Object> serverNodes;//ÕæÊµ·þÎñÆ÷ÐÅÏ¢
+    private TreeMap<Long,Object> nodes;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½hashï¿½Úµï¿½
+    private static final int VIRTUALNODE_NUM=4;//ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½
+    private List<Object> serverNodes;//ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 
     public void init(){//initialization
         serverNodes = new ArrayList<Object>();
@@ -21,6 +21,7 @@ public class ConsistentHash {
         serverNodes.add("192.168.80.2");
         serverNodes.add("192.168.80.3");
         serverNodes.add("192.168.80.4");
+        serverNodes.add("192.168.80.5");
         nodes = new TreeMap<Long,Object>();
         for(int i=0;i<serverNodes.size();i++){
             for(int j=0;j<VIRTUALNODE_NUM;j++){
@@ -30,7 +31,7 @@ public class ConsistentHash {
     }
 
     /**
-     * ´òÓ¡Ô²»·½ÚµãÊý¾Ý
+     * ï¿½ï¿½Ó¡Ô²ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void printMap() {
         System.out.println(nodes);
