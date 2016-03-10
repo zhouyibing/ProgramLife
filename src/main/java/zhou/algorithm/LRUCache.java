@@ -1,16 +1,22 @@
 package zhou.algorithm;
 
-import java.util.Hashtable;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Zhou Yibing on 2016/3/9.
- * 基于hashtable和双向链表实现lru
+ * 基于hashtable和双向链表实现lru 支持并发
  */
 public class LRUCache<K,V> {
     private Hashtable<K,Entry> table;
     private Entry<K,V> first;
     private Entry<K,V> last;
-    private int currentSize;
+    private Lock lock = new ReentrantLock();
+    private volatile int currentSize;
     private int size;
 
     public LRUCache(int size) {
@@ -21,18 +27,71 @@ public class LRUCache<K,V> {
 
     public void put(K key,V value){
         Entry<K,V> entry = table.get(key);
-        if(null==entry){
-           if(currentSize>=size){
-               removeLast();
-           }else{
-               currentSize++;
-           }
-            entry = new Entry<>(key,value);
+        try {
+            lock.lock();
+            if (null == entry) {
+                if (currentSize >= size) {
+                    removeLast();
+                } else {
+                    currentSize++;
+                }
+                entry = new Entry<>(key, value);
+            }
+            entry.value = value;
+            //1.加入的节点加入链表头
+            moveToHead(entry);
+        }finally {
+            lock.unlock();
         }
-        //1.加入的节点加入链表头
-        moveToHead(entry);
         //2.加入table中
         table.put(key,entry);
+    }
+
+    public V get(K key){
+        Entry<K,V> entry = table.get(key);
+        V value = null;
+        try{
+            lock.lock();
+            if(null!=entry){
+                moveToHead(entry);
+                value = entry.value;
+            }
+        }finally {
+            lock.unlock();
+        }
+        return value;
+    }
+
+    public  Set<Entry<K,V>> entrySet(){
+        Set<Entry<K,V>> set = new LinkedHashSet<>();
+        Entry entry = first;
+        while (entry!=null){
+            set.add(entry);
+            entry=entry.next;
+        }
+        return set;
+    }
+
+    public V remove(K key){
+        Entry<K,V> entry = table.get(key);
+        V value = null;
+        try{
+            lock.lock();
+            if(entry!=null){
+                value = entry.value;
+                if(entry.prev!=null)
+                entry.prev.next=entry.next;
+                if(entry.next!=null)
+                entry.next.prev=entry.prev;
+                if(entry==first)
+                    first = entry.next;
+                if(entry==last)
+                    last=entry.prev;
+            }
+        }finally {
+            lock.unlock();
+        }
+        return value;
     }
 
     private void moveToHead(Entry entry) {
@@ -68,10 +127,32 @@ public class LRUCache<K,V> {
         }
     }
 
-    class Entry<K,V>{
-        Entry<K,V> prev;
-        Entry<K,V> next;
-        K key;
+    public static void main(String[] args) throws InterruptedException {
+       final LRUCache<String,String> lruCache = new LRUCache<>(10);
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        for(int i=0;i<100000;i++) {
+            final int finalI = i;
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    lruCache.put(Thread.currentThread().getName()+"-"+ finalI, finalI+"");
+                }
+            });
+        }
+
+        executorService.shutdown();
+        executorService.awaitTermination(10, TimeUnit.MINUTES);
+        Set<Entry<String,String>> set = lruCache.entrySet();
+        for(Iterator it=set.iterator();it.hasNext();){
+            Entry<String,String> next = (Entry<String, String>) it.next();
+            System.out.print(next.key + "," + next.value + " ");
+        }
+    }
+
+    static class Entry<K,V>{
+        volatile  Entry<K,V> prev;
+        volatile  Entry<K,V> next;
+        final K key;
         V value;
 
         public Entry(K key, V value) {
