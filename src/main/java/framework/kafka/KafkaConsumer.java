@@ -5,6 +5,7 @@ import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
+import kafka.message.MessageAndMetadata;
 import org.apache.tools.ant.Executor;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
  * KafkaConsumer
@@ -33,21 +35,44 @@ public class KafkaConsumer extends Thread{
     public void run() {
         ConsumerConnector consumer = createConsumer();
         Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
-        topicCountMap.put(topic, 10); // 一次从主题中获取一个数据
+        topicCountMap.put(topic, 5); // 一次从主题中获取一个数据
         Map<String, List<KafkaStream<byte[], byte[]>>>  messageStreams = consumer.createMessageStreams(topicCountMap);
         List<KafkaStream<byte[], byte[]>> streams = messageStreams.get(topic);// 获取每次接收到的这个数据
+
+        ScheduledThreadPoolExecutor executorService = new ScheduledThreadPoolExecutor(10);
         for(final KafkaStream stream:streams) {
-            ExecutorService executorService = Executors.newFixedThreadPool(10);
+            System.out.println(stream);
             executorService.submit(new Runnable() {
                 @Override
                 public void run() {
                     ConsumerIterator<byte[], byte[]> iterator = stream.iterator();
+                    String topic;
+                    String msg;
+                    long offset;
+                    int partition;
+                    MessageAndMetadata<byte[],byte[]> messageAndMetadata;
                     while (iterator.hasNext()) {
-                        String message = new String(iterator.next().message());
-                        System.out.println("接收到: " + message);
+                        messageAndMetadata = iterator.next();
+                        msg = new String(messageAndMetadata.message());
+                        topic = messageAndMetadata.topic();
+                        offset = messageAndMetadata.offset();
+                        partition = messageAndMetadata.partition();
+                        System.out.println(Thread.currentThread().getName()+"接收到来自partition-"+partition+"的第"+offset+"消息:["+topic+"]"+msg
+                                +",productArity:"+messageAndMetadata.productArity()+" productPrefix:"+ messageAndMetadata.productPrefix());
                     }
                 }
             });
+        }
+        while(!executorService.isTerminated()){
+            System.out.print("activeCount:"+executorService.getActiveCount()+" taskCount:"+executorService.getTaskCount()+
+            " completedTaskCount:"+executorService.getCompletedTaskCount()+" coreSize:"+executorService.getCorePoolSize()+
+                    " poolSize:"+executorService.getPoolSize()+" maxPoolSize:"+executorService.getMaximumPoolSize());
+            System.out.println();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
