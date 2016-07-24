@@ -1,9 +1,9 @@
-package zhou.algorithm;
+package zhou.algorithm.bstree;
 
 import com.google.common.collect.Lists;
-import lombok.Data;
 
 import java.util.List;
+
 
 /**
  * Created by yibingzhou on 2016/7/20.
@@ -15,10 +15,16 @@ import java.util.List;
  （3）左、右子树也分别为二叉排序树；
  （4）没有键值相等的结点
  */
-public class BSTree<T extends Comparable> {
+public class BSTree<T extends Comparable> implements IBStree<T>{
     private Node root;
     private int size;
 
+    @Override
+    public int size(){
+        return size;
+    }
+
+    @Override
     public void add(T v){
         Node n = new Node(v);
         if(null==root) {
@@ -52,6 +58,7 @@ public class BSTree<T extends Comparable> {
         }
     }
 
+    @Override
     public void delete(T v){
         Node current = root;
         while (null!=current){
@@ -107,6 +114,7 @@ public class BSTree<T extends Comparable> {
             return minNode(n);
     }
 
+    @Override
     public Node findFirst(T v){
         Node current = root;
         while(current!=null) {
@@ -126,6 +134,7 @@ public class BSTree<T extends Comparable> {
      * @param v
      * @return
      */
+    @Override
     public T preNode(T v){
         if(root==null) return null;
         Node current = root;
@@ -133,7 +142,7 @@ public class BSTree<T extends Comparable> {
             int com = current.value.compareTo(v);
             if (com == 0) {
                 if (current.left == null) return null;
-                return current.left.value;
+                return (T) current.left.value;
             } else if (com > 0) {
                 if (current.right == null) return null;
                 current = current.right;
@@ -149,6 +158,7 @@ public class BSTree<T extends Comparable> {
      * @param v
      * @return
      */
+    @Override
     public T postNode(T v){
         if(root==null) return null;
         Node current = root;
@@ -156,7 +166,7 @@ public class BSTree<T extends Comparable> {
             int com = current.value.compareTo(v);
             if (com == 0) {
                 if (current.right == null) return null;
-                return current.right.value;
+                return (T) current.right.value;
             } else if (com > 0) {
                 if (current.left == null) return null;
                 current = current.left;
@@ -170,14 +180,15 @@ public class BSTree<T extends Comparable> {
      * 前序排序
      * @return
      */
-    public List<T> preSort(){
+
+    public List<Comparable> preSort(){
         if(root==null) return null;
-        List<T> list = Lists.newArrayListWithExpectedSize(size);
+        List<Comparable> list = Lists.newArrayListWithExpectedSize(size);
         preSort(root,list);
         return list;
     }
 
-    private void preSort(Node n, List<T> list){
+    private void preSort(Node n, List<Comparable> list){
         list.add(n.value);
         if(n.left!=null)
             preSort(n.left,list);
@@ -189,6 +200,7 @@ public class BSTree<T extends Comparable> {
      * 中序排序
      * @return
      */
+    @Override
     public List<T> midSort(){
         if(root==null) return null;
         List<T> list = Lists.newArrayListWithExpectedSize(size);
@@ -199,7 +211,7 @@ public class BSTree<T extends Comparable> {
     private void midSort(Node n, List<T> list){
         if(n.left!=null)
             midSort(n.left,list);
-        list.add(n.value);
+        list.add((T) n.value);
         if(n.right!=null)
             midSort(n.right,list);
     }
@@ -210,12 +222,12 @@ public class BSTree<T extends Comparable> {
      */
     public List<T> postSort(){
         if(root==null) return null;
-        List<T> list = Lists.newArrayListWithExpectedSize(size);
+        List list = Lists.newArrayListWithExpectedSize(size);
         postSort(root,list);
         return list;
     }
 
-    private void postSort(Node n, List<T> list){
+    private void postSort(Node n, List<Comparable> list){
         if(n.left!=null)
             postSort(n.left,list);
         if(n.right!=null)
@@ -223,20 +235,10 @@ public class BSTree<T extends Comparable> {
         list.add(n.value);
     }
 
-    @Data
-    class Node{
-        private T value;
-        private Node parent;
-        private Node left;
-        private Node right;
 
-        public Node(T value) {
-            this.value = value;
-        }
-    }
 
     public static void main(String[] args){
-        BSTree<Long> tree = new BSTree<>();
+        BSTree<Long> tree = new BSTree();
         tree.add(12L);
         tree.add(23234L);
         tree.add(225L);

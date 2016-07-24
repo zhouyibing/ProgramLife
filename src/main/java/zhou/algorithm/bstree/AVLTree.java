@@ -1,6 +1,5 @@
-package zhou.algorithm;
+package zhou.algorithm.bstree;
 
-import lombok.Data;
 
 /**
  * Created by yibingzhou on 2016/7/21.
@@ -18,24 +17,6 @@ import lombok.Data;
  LR型 data<unbalanceNode.data&&data>unbalanceNode.left.data
  RL型 data>unbalanceNode.data&&data<unbalanceNode.right.data
  */
-public class AVLTree<T extends Comparable>{
-    private Node root;
-    private int size;
+public class AVLTree extends BSTree{
 
-    private void add(T v){
-
-    }
-
-    @Data
-    class Node<T>{
-        private T value;
-        private Node parent;
-        private Node left;
-        private Node right;
-        private int bf;//平衡因子
-
-        public Node(T value) {
-            this.value = value;
-        }
-    }
 }
