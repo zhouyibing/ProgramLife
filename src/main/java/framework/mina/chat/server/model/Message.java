@@ -8,7 +8,6 @@ import java.util.Date;
  * Created by Zhou Yibing on 2016/2/23.
  * ?????
  */
-@Data
 public class Message {
     private String messageId;//???id
     private String sendUser;//??????
@@ -27,5 +26,61 @@ public class Message {
         private int getCode(){
             return code;
         }
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getSendUser() {
+        return sendUser;
+    }
+
+    public void setSendUser(String sendUser) {
+        this.sendUser = sendUser;
+    }
+
+    public String getReceivedUser() {
+        return receivedUser;
+    }
+
+    public void setReceivedUser(String receivedUser) {
+        this.receivedUser = receivedUser;
+    }
+
+    public Date getSendTime() {
+        return sendTime;
+    }
+
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public MessageType getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(MessageType messageType) {
+        this.messageType = messageType;
+    }
+
+    public String getRelationId() {
+        return relationId;
+    }
+
+    public void setRelationId(String relationId) {
+        this.relationId = relationId;
     }
 }

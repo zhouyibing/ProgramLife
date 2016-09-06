@@ -7,7 +7,6 @@ import java.util.UUID;
 /**
  * Created by Zhou Yibing on 2016/2/26.
  */
-@Data
 public class Connection {
 
     private String id;
@@ -34,5 +33,29 @@ public class Connection {
                 ", connectionName='" + connectionName + '\'' +
                 ", connected=" + connected +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getConnectionName() {
+        return connectionName;
+    }
+
+    public void setConnectionName(String connectionName) {
+        this.connectionName = connectionName;
+    }
+
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
     }
 }
