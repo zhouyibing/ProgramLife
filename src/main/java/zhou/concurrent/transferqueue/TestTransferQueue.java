@@ -1,12 +1,12 @@
 package zhou.concurrent.transferqueue;
  
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TransferQueue;
-
-import org.junit.Assert;
-import org.junit.Test;
 /**
  * 测试LinkedTransferQueue的一些特性
  * 
