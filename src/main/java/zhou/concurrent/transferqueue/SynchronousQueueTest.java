@@ -5,12 +5,13 @@ import org.junit.Test;
 
 import java.util.Queue;
 import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2016/9/6.
  */
 public class SynchronousQueueTest {
-    static Queue queue;
+    static SynchronousQueue queue;
 
     @BeforeClass
     public static void init(){
@@ -19,7 +20,11 @@ public class SynchronousQueueTest {
 
     @Test
     public void test(){
-        queue.offer("a");
-        System.out.println(queue.poll());
+        try {
+            queue.offer("a",10, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().isInterrupted());
     }
 }

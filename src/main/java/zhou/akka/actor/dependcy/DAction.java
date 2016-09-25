@@ -7,12 +7,11 @@ import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.pattern.Patterns;
-import zhou.akka.actor.dependcy.DInterface.DInterfaceCreator;
 
 public class DAction extends UntypedActor{
-	ActorRef actorA= getContext().actorOf(Props.create(new DInterfaceCreator("DInterfaceA")));
-	ActorRef actorB= getContext().actorOf(Props.create(new DInterfaceCreator("DInterfaceB")));
-	ActorRef actorC= getContext().actorOf(Props.create(new DInterfaceCreator("DInterfaceC")));
+	ActorRef actorA= getContext().actorOf(Props.create(new DInterface.DInterfaceCreator("DInterfaceA")));
+	ActorRef actorB= getContext().actorOf(Props.create(new DInterface.DInterfaceCreator("DInterfaceB")));
+	ActorRef actorC= getContext().actorOf(Props.create(new DInterface.DInterfaceCreator("DInterfaceC")));
 		public DAction() {
 			super();
 		}

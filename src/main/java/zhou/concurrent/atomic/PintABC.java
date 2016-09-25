@@ -45,7 +45,7 @@ public class PintABC {
             if(next>mySequence)
                 System.out.println();
 
-//casÉèÖÃÏÂÒ»¸öÖ´ĞĞĞòºÅ
+//casï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½
             runFlag.compareAndSet(mySequence, next);
         }
     }

@@ -16,8 +16,8 @@ import java.util.List;
  （4）没有键值相等的结点
  */
 public class BSTree<T extends Comparable> implements IBStree<T>{
-    private Node root;
-    private int size;
+    protected Node root;
+    protected int size;
 
     @Override
     public int size(){
@@ -25,7 +25,13 @@ public class BSTree<T extends Comparable> implements IBStree<T>{
     }
 
     @Override
-    public void add(T v){
+    public T getRoot() {
+        if(null==root) return null;
+        return (T) root.value;
+    }
+
+    @Override
+    public void insert(T v){
         Node n = new Node(v);
         if(null==root) {
             root=n;
@@ -59,8 +65,9 @@ public class BSTree<T extends Comparable> implements IBStree<T>{
     }
 
     @Override
-    public void delete(T v){
+    public int delete(T v){
         Node current = root;
+        int count = 0;
         while (null!=current){
             int r = current.value.compareTo(v);
             if(r>0)
@@ -75,28 +82,35 @@ public class BSTree<T extends Comparable> implements IBStree<T>{
                 }else if(current.right!=null){
                     temp=maxNode(current.right);
                 }
-                if(null!=current.parent&&current.parent.left==current) current.parent.left= temp;
-                else if(null!=current.parent&&current.parent.right==current) current.parent.right=temp;
-                if(temp!=null){
-                    if(temp!=current.left) {
-                        temp.left = current.left;
-                        current.left.parent = temp;
-                    }
-                    if(temp!=current.right) {
-                        temp.right = current.right;
-                        current.right.parent = temp;
-                    }
-                    if(temp.value.compareTo(current.value)<0)
-                       temp.parent.right=null;
-                    if(temp.value.compareTo(current.value)>0)
-                        temp.parent.left=null;
+                if(null!=current.parent){
+                    if(current.parent.left==current)
+                        current.parent.left = temp;
+                    else
+                        current.parent.right = temp;
                 }
-                current=null;
+                if(temp!=null){
+                    if(null!=temp.parent&&temp.parent.left==temp) temp.parent.left=temp.right;
+                    if(null!=temp.parent&&temp.parent.right==temp) temp.parent.right=temp.left;
+                    temp.left=current.left;
+                    temp.right=current.right;
+                    setParent(temp,current.parent);
+                }
+                setParent(current.left,temp);
+                setParent(current.right,temp);
+                if(current==root) root=temp;
+                current=temp;
+                size--;
+                count++;
             }
         }
+        return count;
     }
 
-    private Node maxNode(Node n){
+    protected void setParent(Node n,Node parent){
+        if(n!=null)
+            n.parent = parent;
+    }
+    protected Node maxNode(Node n){
         if(null==n)
             return n;
         if(n.right==null)
@@ -105,28 +119,13 @@ public class BSTree<T extends Comparable> implements IBStree<T>{
             return maxNode(n.right);
     }
 
-    private Node minNode(Node n){
+    protected Node minNode(Node n){
         if(null==n)
             return n;
         if(n.left==null)
             return n;
         else
             return minNode(n);
-    }
-
-    @Override
-    public Node findFirst(T v){
-        Node current = root;
-        while(current!=null) {
-            int com = current.value.compareTo(v);
-            if (com == 0)
-                return current;
-            else if(com>0)
-                current=current.left;
-            else
-                current=current.right;
-        }
-        return null;
     }
 
     /**
@@ -208,6 +207,12 @@ public class BSTree<T extends Comparable> implements IBStree<T>{
         return list;
     }
 
+    @Override
+    public void clear() {
+        root = null;
+        size = 0;
+    }
+
     private void midSort(Node n, List<T> list){
         if(n.left!=null)
             midSort(n.left,list);
@@ -233,24 +238,5 @@ public class BSTree<T extends Comparable> implements IBStree<T>{
         if(n.right!=null)
             postSort(n.right,list);
         list.add(n.value);
-    }
-
-
-
-    public static void main(String[] args){
-        BSTree<Long> tree = new BSTree();
-        tree.add(12L);
-        tree.add(23234L);
-        tree.add(225L);
-        tree.add(2L);
-        tree.add(356L);
-        tree.add(14L);
-        tree.add(258L);
-        tree.add(123L);
-        tree.delete(225L);
-        List<Long> midSort = tree.midSort();
-        for(Long i:midSort)
-            System.out.print(i+",");
-        System.out.println(tree.findFirst(258L));
     }
 }

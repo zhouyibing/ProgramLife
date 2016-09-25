@@ -7,7 +7,6 @@ import zhou.jta.jotm.dao.DbOne;
 import zhou.jta.jotm.dao.DbTwo;
 
 
-
 public class TranTest {
 	
 	private DbOne dbone = null;

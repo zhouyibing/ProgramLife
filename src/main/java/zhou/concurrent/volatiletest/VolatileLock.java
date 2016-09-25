@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Zhou Yibing on 2016/1/26.
- * 基于volatile来实现一个lock,不太可靠
+ * 锟斤拷锟斤拷volatile锟斤拷实锟斤拷一锟斤拷lock,锟斤拷太锟缴匡拷
  */
 public class VolatileLock {
     private static final Lock lock = new Lock();

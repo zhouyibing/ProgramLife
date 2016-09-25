@@ -15,9 +15,9 @@ import zhou.base.rpc.support.Server;
 public class RPC {
 
     /**
-     * Ê¹ÓÃRPC.getProxyÉú³É½Ó¿ÚEchoµÄ´úÀíÊµÏÖÀà¡£È»ºó¾Í¿ÉÒÔÏñÊ¹ÓÃ±¾µØµÄ³ÌÐòÒ»ÑùÀ´µ÷ÓÃEchoÖÐµÄecho·½·¨¡£
-     * Ê¹ÓÃRPCµÄºÃ´¦ÊÇ¼ò»¯ÁËÔ¶³Ì·þÎñ·ÃÎÊ¡£Ìá¸ßÁË¿ª·¢Ð§ÂÊ¡£ÔÚ·Ö·¢´úÂëÊ±£¬
-     * Ö»ÐèÒª½«½Ó¿Ú·Ö·¢¸ø¿Í»§¶ËÊ¹ÓÃ£¬ÔÚ¿Í»§¶Ë¿´À´Ö»ÓÐ½Ó¿Ú£¬Ã»ÓÐ¾ßÌåÀàÊµÏÖ¡£ÕâÑù±£Ö¤ÁË´úÂëµÄ¿ÉÀ©Õ¹ÐÔºÍ°²È«ÐÔ¡£
+     * Ê¹ï¿½ï¿½RPC.getProxyï¿½ï¿½ï¿½É½Ó¿ï¿½Echoï¿½Ä´ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½à¡£È»ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã±ï¿½ï¿½ØµÄ³ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Echoï¿½Ðµï¿½echoï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * Ê¹ï¿½ï¿½RPCï¿½ÄºÃ´ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½Ô¶ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½Ð§ï¿½Ê¡ï¿½ï¿½Ú·Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+     * Ö»ï¿½ï¿½Òªï¿½ï¿½ï¿½Ó¿Ú·Ö·ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½Ê¹ï¿½Ã£ï¿½ï¿½Ú¿Í»ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½Ö»ï¿½Ð½Ó¿Ú£ï¿½Ã»ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½Ë´ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Õ¹ï¿½ÔºÍ°ï¿½È«ï¿½Ô¡ï¿½
      * @param clazz
      * @param host
      * @param port

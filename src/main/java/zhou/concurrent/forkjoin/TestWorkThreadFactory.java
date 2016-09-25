@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * Fork/Join框架使用的线程叫工作者线程。Java包含继承Thread类的ForkJoinWorkerThread类和使用Fork/Join框架实现工作者线程。
  * 如果你想在ForkJoinPool类中使用MyWorkerThread线程，你必须实现自己的线程工厂。

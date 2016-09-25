@@ -1,7 +1,6 @@
 package zhou.akka.example_pi;
 
 import akka.actor.*;
-import akka.japi.Creator;
 import akka.routing.RoundRobinRouter;
 import scala.concurrent.duration.Duration;
 
@@ -104,10 +103,10 @@ public class Pi {
 
 
     /********* message  define *******/
-    //Calculate ¨C sent to the Master actor to start the calculation
+    //Calculate ï¿½C sent to the Master actor to start the calculation
     static class Calculate{}
 
-    //Work ¨C sent from the Master actor to the Worker actors containing the work assignment
+    //Work ï¿½C sent from the Master actor to the Worker actors containing the work assignment
     static class Work{
         private final int start;
         private final int nrOfElements;
@@ -121,7 +120,7 @@ public class Pi {
         public int getNrOfElements(){return nrOfElements;}
     }
 
-    //Result ¨C sent from the Worker actors to the Master actor containing the result from the worker¡¯s calculation
+    //Result ï¿½C sent from the Worker actors to the Master actor containing the result from the workerï¿½ï¿½s calculation
     static class Result{
         private final double value;
 
@@ -139,7 +138,7 @@ public class Pi {
         }
     }
 
-    //PiApproximation ¨C sent from the Master actor to the Listener actor containing the the final pi result and how long time the calculation took
+    //PiApproximation ï¿½C sent from the Master actor to the Listener actor containing the the final pi result and how long time the calculation took
     static class PiApproximation{
         private final double pi;
         private final Duration duration;

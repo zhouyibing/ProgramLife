@@ -15,7 +15,7 @@ public class Connect2Fabric {
         Connection con = null;
         PreparedStatement stmt =null;
         try {
-            //Á¬½Ómysql fabricÊý¾Ý¿â
+            //ï¿½ï¿½ï¿½ï¿½mysql fabricï¿½ï¿½ï¿½Ý¿ï¿½
             Class.forName("com.mysql.jdbc.Driver");//FabricMySQLDriver;com.mysql.jdbc.Driver
             con = DriverManager.getConnection("jdbc:mysql://192.168.80.142:3306/test?user=root&password=123456");
             String sql = "insert into user(id,name,sex,age) values(?,?,?,?)";
@@ -47,7 +47,7 @@ public class Connect2Fabric {
         Connection con = null;
         PreparedStatement stmt =null;
         try {
-            //Á¬½Ómysql fabricÊý¾Ý¿â
+            //ï¿½ï¿½ï¿½ï¿½mysql fabricï¿½ï¿½ï¿½Ý¿ï¿½
             Class.forName("com.mysql.fabric.jdbc.FabricMySQLDriver");//FabricMySQLDriver;com.mysql.jdbc.Driver
             con = DriverManager.getConnection("jdbc:mysql:fabric://192.168.80.142:32274/test?fabricServerGroup=my_group&fabricUsername=admin&fabricPassword=fabric");
             String sql = "insert into user(id,name,sex,age) values(?,?,?,?) ";

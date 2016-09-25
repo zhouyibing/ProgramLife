@@ -7,7 +7,7 @@ import java.beans.PropertyDescriptor;
 /**
  * Created by Zhou Yibing on 2015/10/15.
  *
- * Java内省机制
+ * Java锟斤拷省锟斤拷锟斤拷
  */
 public class IntrospectorTest {
 

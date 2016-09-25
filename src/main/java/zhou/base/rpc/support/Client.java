@@ -56,7 +56,7 @@ public class Client {
 	        oos = new ObjectOutputStream(socket.getOutputStream());  
 	    }  
 	  
-	    public void invoke(Invocation invo) throws UnknownHostException, IOException, ClassNotFoundException {  
+	    public void invoke(Invocation invo) throws UnknownHostException, IOException, ClassNotFoundException {
 	        init();  
 	        System.out.println("写入数据");  
 	        oos.writeObject(invo);  

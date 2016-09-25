@@ -3,8 +3,8 @@ package zhou.jta.jotm.test;
 
 import org.junit.Test;
 
-import zhou.jta.jotm.help.SpringHelper;
 import zhou.jta.jotm.transaction.TranTest;
+import zhou.jta.jotm.help.SpringHelper;
 
 public class TransaTest {
 	

@@ -77,7 +77,7 @@ public class UsafeTest {
                 Field f = sun.misc.Unsafe.class.getDeclaredField("theUnsafe");
                 f.setAccessible(true);
                 UNSAFE = (sun.misc.Unsafe) f.get(null);
-                //UNSAFE = sun.misc.Unsafe.getUnsafe();//Ö±½ÓÕâÑù»ñÈ¡unsafe£¬jvmÊÇ²»ÔÊÐíµÄ¡£ÈÏÎªÊÇ²»°²È«µÄ£¬ÅÜ³ösecurityException
+                //UNSAFE = sun.misc.Unsafe.getUnsafe();//Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡unsafeï¿½ï¿½jvmï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½Îªï¿½Ç²ï¿½ï¿½ï¿½È«ï¿½Ä£ï¿½ï¿½Ü³ï¿½securityException
                 Class clazz = test.class;
                 aOffset = UNSAFE.objectFieldOffset(clazz.getDeclaredField("a"));
                 bOffset = UNSAFE.objectFieldOffset(clazz.getDeclaredField("b"));
