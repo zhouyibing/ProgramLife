@@ -102,9 +102,10 @@ public class AVLTree <T extends Comparable> extends BSTree<T>{
                 //重平衡删除节点temp父节点
                 if(null==p) p = current.parent;
                 rebalanceAfterDelete(p);
-                current=temp;
                 size--;
                 count++;
+                if(temp==null) break;
+                current=temp;
             }
         }
         return count;

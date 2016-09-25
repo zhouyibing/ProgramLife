@@ -5,6 +5,10 @@ import zhou.algorithm.bstree.AVLTree;
 import zhou.algorithm.bstree.BSTree;
 import zhou.algorithm.bstree.IBStree;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -19,7 +23,7 @@ public class BSTreeTest {
         Random random = new Random();
         System.out.print("insert sequence:");
         int del = 0;
-        for(int i=0;i<20;i++){
+        for(int i=0;i<200;i++){
             int r = random.nextInt(100);
             System.out.print(r+" ");
             if(0==del&&i==random.nextInt(20))
@@ -33,6 +37,20 @@ public class BSTreeTest {
         tree.delete(del);
         print(tree);
         System.out.println("size:"+tree.size());
+    }
+
+    @Test
+    public void testDelete4() throws IOException {
+        IBStree<Integer> tree = new BSTree();
+        BufferedReader reader = new BufferedReader(new FileReader("D:\\sequence.txt"));
+        String seq = reader.readLine();
+        String[] eles = seq.split(",");
+        for(String s:eles){
+            tree.insert(Integer.valueOf(s));
+        }
+        System.out.println("delete count:"+tree.delete(4));
+        System.out.println("size:"+tree.size());
+
     }
 
     @Test

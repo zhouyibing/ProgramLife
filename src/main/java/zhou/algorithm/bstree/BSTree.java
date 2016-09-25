@@ -98,7 +98,7 @@ public class BSTree<T extends Comparable> implements IBStree<T>{
                 setParent(current.left,temp);
                 setParent(current.right,temp);
                 if(current==root) root=temp;
-                current=temp;
+                current=current.right;
                 size--;
                 count++;
             }
