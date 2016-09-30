@@ -13,12 +13,12 @@ package zhou.algorithm;
  */
 public class CompletePackage extends Package{
 
-    public CompletePackage(int[] weight, int[] value, int vol) {
+    public CompletePackage(Integer[] weight, Integer[] value, Integer vol) {
         super(weight, value, vol);
     }
 
     @Override
-    public int[] bestSolution() {
+    public Integer[] bestSolution() {
         int l = weight.length;
         int[][] m = new int[l+1][vol+1];
         for(int i=1;i<l+1;i++)
@@ -40,7 +40,7 @@ public class CompletePackage extends Package{
         }
         //求哪个物品被选取
         int v = vol;
-        int[] x = new int[l];
+        Integer[] x = new Integer[l];
         for(int i=x.length;i>=1;i--){
             v-=weight[i-1];
             x[i-1]=(m[i][v]-m[i-1][v])/value[i-1];
@@ -49,9 +49,9 @@ public class CompletePackage extends Package{
     }
 
     public static void main(String[] args){
-        int [] v = new int[]{4,5,6};
-        CompletePackage p = new CompletePackage(new int[]{3,4,5},v,10);
-        int[] x = p.bestSolution();
+        Integer [] v = new Integer[]{4,5,6};
+        CompletePackage p = new CompletePackage(new Integer[]{3,4,5},v,10);
+        Integer[] x = p.bestSolution();
         int value = 0;
         System.out.print("物品选中情况：");
         for(int i=0;i<x.length;i++){
