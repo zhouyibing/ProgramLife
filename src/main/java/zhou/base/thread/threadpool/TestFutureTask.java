@@ -34,7 +34,7 @@ public class TestFutureTask {
 		}
 
 		for (int i = 0; i < resultTasks.length-1; i++) {
-			resultTasks[i].cancel(true);
+			System.out.println("cancel task-"+i+":"+resultTasks[i].cancel(true));
 		}
 
 		for (int i = 0; i < resultTasks.length; i++) {
@@ -91,7 +91,14 @@ class ResultTask extends FutureTask<String> {
 		if (isCancelled()) {
 			System.out.printf("%s: Has been canceled\n", name);
 		} else {
-			System.out.printf("%s: Has finished\n", name);
+			try {
+				System.out.printf("%s: Has finished,result is %s\n", name,get());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
 		}
+
 	}
 }

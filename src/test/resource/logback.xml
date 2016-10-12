@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <jmxConfigurator />
+    <substitutionProperty name="default_pattern" value="%date %-5level %logger{30} - %msg%n" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoding>UTF-8</encoding>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${default_pattern}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoding>UTF-8</encoding>
+        <file>/opt/logs/tomcat/ProgramLife.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/opt/logs/tomcat/ProgramLife.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${default_pattern}</pattern>
+        </layout>
+    </appender>
+
+    <!-- Output to central logging -->
+
+    <logger name="framework">
+        <level value="DEBUG" />
+    </logger>
+    <logger name="zhou">
+        <level value="DEBUG" />
+    </logger>
+    
+    <logger name="org.springframework">
+        <level value="ERROR" />
+    </logger>
+
+    <logger name="org.mongodb">
+        <level value="ERROR" />
+    </logger>
+
+    <logger name="org.mybatis">
+        <level value="WARN" />
+    </logger>
+
+    <logger name="java.sql">
+        <level value="WARN" />
+    </logger>
+    
+    <logger name="org.apache.commons">
+        <level value="ERROR" />
+    </logger>
+        
+    <logger name="com.meidusa.toolkit">
+        <level value="ERROR" />
+    </logger>
+    
+    <logger name="org.eclipse.jetty">
+        <level value="INFO" />
+    </logger>
+
+    <root level="ERROR">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="fileAppender" />
+        <appender-ref ref="CLoggingAppender" />
+    </root>
+    
+</configuration>
