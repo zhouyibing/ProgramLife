@@ -1,4 +1,4 @@
-package framework.hadoop;
+package com.zhou.hadoop;
 
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -44,7 +44,7 @@ public class Temperature {
 
         @Override
         public void map(LongWritable key, Text value, OutputCollector<IntWritable, IntWritable> outputCollector, Reporter reporter) throws IOException {
-            logger.info("before Mapper:line num={},value={}",key,value);
+            //logger.info("before Mapper:line num={},value={}",key,value);
             reporter.progress();//tell them mapper is  progressing
             String line = value.toString();
             int year = Integer.valueOf(line.substring(0,4));
@@ -55,7 +55,7 @@ public class Temperature {
             if ((noRecords%100) == 0) {
                 reporter.setStatus(mapTaskId + " processed " + noRecords + " from input-file: " + inputFile);
             }
-            logger.info("after Mapper:key={},value={}",year,temp);
+            //logger.info("after Mapper:key={},value={}",year,temp);
         }
     }
 
@@ -84,14 +84,14 @@ public class Temperature {
                 sb.append(value).append(",");
                 count++;
             }
-            logger.info("before Reduce:value count={}",count);
+            //logger.info("before Reduce:value count={}",count);
             reporter.incrCounter(ReducerCounters.REDUCED_RECORDS,1);
             ++noKeys;
             output.collect(key,new IntWritable(maxValue));
             if ((noKeys%100) == 0) {
                reporter.setStatus(reduceTaskId + " processed " + noKeys);
             }
-            logger.info("after Reduce:key={},maxValue={}",key,maxValue);
+            //logger.info("after Reduce:key={},maxValue={}",key,maxValue);
         }
 
         @Override
@@ -106,8 +106,8 @@ public class Temperature {
     }
 
     public static void main(String[] args) throws IOException {
-        System.setProperty("hadoop.home.dir","D:\\hadoop-2.7.2");
-        System.setProperty("HADOOP_USER_NAME","jianyugu");
+        //System.setProperty("hadoop.home.dir","D:\\hadoop-2.7.2");
+        //System.setProperty("HADOOP_USER_NAME","jianyugu");
         JobConf conf  = new JobConf();
         conf.set("fs.hdfs.impl",org.apache.hadoop.hdfs.DistributedFileSystem.class.getName());
         conf.set("fs.file.impl",org.apache.hadoop.fs.LocalFileSystem.class.getName());
@@ -119,7 +119,7 @@ public class Temperature {
         conf.setOutputKeyClass(IntWritable.class);
         conf.setOutputValueClass(IntWritable.class);
         //如果需要打成jar运行，需要下面这句
-        //conf.setJarByClass(Temperature.class);
+        conf.setJarByClass(Temperature.class);
         //Job job = new Job(conf);
         //运行前先将output目录删除
         FileSystem hdfs = FileSystem.get(URI.create("hdfs://10.2.56.199:9000/"),conf);

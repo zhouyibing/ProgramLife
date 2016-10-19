@@ -1,4 +1,4 @@
-package framework.hadoop;
+package com.zhou.hadoop;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
