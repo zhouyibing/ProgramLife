@@ -148,8 +148,8 @@ public class Package {
         Package p = new Package();
         Map<Integer,Set<Integer>> map = p.affinitive(w,8);
         System.out.println(map);
-       /* Integer [] v = new Integer[]{30,45,25,40,30};
-        Package p = new Package(new Integer[]{30,45,25,40,30},v,45);
+        /*Integer [] v = new Integer[]{4,5,6};
+        Package p = new Package(new Integer[]{3,4,5},v,10);
         Integer[] x = p.bestSolution();
         int value = 0;
         System.out.print("物品选中情况：");

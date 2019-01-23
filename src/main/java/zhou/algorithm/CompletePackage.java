@@ -43,6 +43,7 @@ public class CompletePackage extends Package{
         Integer[] x = new Integer[l];
         for(int i=x.length;i>=1;i--){
             v-=weight[i-1];
+            if(v>0)
             x[i-1]=(m[i][v]-m[i-1][v])/value[i-1];
         }
         return x;
